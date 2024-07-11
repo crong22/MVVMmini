@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class MainViewController : UIViewController {
     let topView = UIView()
@@ -190,6 +191,8 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.id, for: indexPath) as! MainCollectionViewCell
         let data = viewmodel.OuputWheatherData.value?.list[indexPath.row]
+        
+        // 날짜(시간)
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-DD HH:mm:ss"
         formatter.locale = Locale(identifier: "ko_KR")
@@ -205,7 +208,9 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
         }else{
             print("error")
         }
+        //
         
+        // 온도
         let apiDate = UserDefaults.standard.string(forKey: "apiDate")
         cell.timeLabel.text = apiDate! + "시"
         
@@ -216,7 +221,14 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
         let temp = UserDefaults.standard.double(forKey: "temp") 
         let apitemp = String(format: "%.1f", temp)
         cell.tempLabel.text = apitemp + "°"
-
+        //
+        
+        // 날씨아이콘 (Kf)
+        let imageIcon = data?.weather[0].icon
+        let url = URL(string: "https://openweathermap.org/img/wn/\(imageIcon!)@2x.png")
+        cell.cloudImage.kf.setImage(with: url)
+        //
+        
         return cell
     }
     

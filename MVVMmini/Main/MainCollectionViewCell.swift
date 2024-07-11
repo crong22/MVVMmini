@@ -36,7 +36,6 @@ class MainCollectionViewCell : UICollectionViewCell {
             make.leading.equalTo(mainView.safeAreaLayoutGuide).offset(15)
         }
         
-//        tempLabel.backgroundColor = .gray
         tempLabel.text = "24°"
         tempLabel.textColor = .white
         tempLabel.font = .systemFont(ofSize: 16, weight: .medium)
@@ -49,8 +48,8 @@ class MainCollectionViewCell : UICollectionViewCell {
         cloudImage.contentMode = .scaleAspectFit
         cloudImage.snp.makeConstraints { make in
             make.top.equalTo(timeLabel.snp.bottom).offset(30)
-            make.leading.equalTo(mainView.safeAreaLayoutGuide).offset(15)
-            make.height.width.equalTo(35)
+            make.leading.equalTo(mainView.safeAreaLayoutGuide).offset(12)
+            make.height.width.equalTo(45)
         }
         
     }

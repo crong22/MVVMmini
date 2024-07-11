@@ -41,7 +41,7 @@ struct WeatherElement: Decodable {
     let id: Int?
     let main: String?
     let description: String?
-    let icon: String?
+    let icon: String
 }
 
 struct Clouds: Decodable {
