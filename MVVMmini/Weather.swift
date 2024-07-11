@@ -13,45 +13,45 @@ struct Weather: Decodable {
 }
 
 struct List: Decodable {
-    let dt: Int
+    let dt: Int?
     let main: Main
     let weather: [WeatherElement]
     let clouds: Clouds
     let wind: Wind
-    let visibility: Int
-    let pop: Double
+    let visibility: Int?
+    let pop: Double?
     let rain: Rain?
     let sys: Sys
-    let dt_txt: String
+    let dt_txt: String?
 }
 
 struct Main: Decodable {
-    let temp: Double
-    let feels_like: Double
-    let temp_min: Double
-    let temp_max: Double
-    let pressure: Int
-    let sea_level: Int
-    let grnd_level: Int
-    let humidity: Int
-    let temp_kf: Double
+    let temp: Double?
+    let feels_like: Double?
+    let temp_min: Double?
+    let temp_max: Double?
+    let pressure: Int?
+    let sea_level: Int?
+    let grnd_level: Int?
+    let humidity: Int?
+    let temp_kf: Double?
 }
 
 struct WeatherElement: Decodable {
-    let id: Int
-    let main: String
-    let description: String
-    let icon: String
+    let id: Int?
+    let main: String?
+    let description: String?
+    let icon: String?
 }
 
 struct Clouds: Decodable {
-    let all: Int
+    let all: Int?
 }
 
 struct Wind: Decodable {
-    let speed: Double
-    let deg: Int
-    let gust: Double
+    let speed: Double?
+    let deg: Int?
+    let gust: Double?
 }
 
 struct Rain: Decodable {
@@ -63,21 +63,21 @@ struct Rain: Decodable {
 }
 
 struct Sys: Decodable {
-    let pod: String
+    let pod: String?
 }
 
 struct City: Decodable {
-    let id: Int
-    let name: String
+    let id: Int?
+    let name: String?
     let coord: Coord
-    let country: String
-    let population: Int
-    let timezone: Int
-    let sunrise: Int
-    let sunset: Int
+    let country: String?
+    let population: Int?
+    let timezone: Int?
+    let sunrise: Int?
+    let sunset: Int?
 }
 
 struct Coord: Decodable {
-    let lat: Double
-    let lon: Double
+    let lat: Double?
+    let lon: Double?
 }

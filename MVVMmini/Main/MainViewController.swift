@@ -19,6 +19,9 @@ class MainViewController : UIViewController {
     //model선언
     let viewmodel = MainViewModel()
     
+    var list : Weather?
+    var listcount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +38,8 @@ class MainViewController : UIViewController {
     func bindData() {
         viewmodel.inputViewDidLoadTrigger.value = ()
         
-        viewmodel.OuputWheatherData.bind { value in
+        viewmodel.OuputWheatherData.bind { [self] value in
+            self.tableView.reloadData()
             self.collectionView.reloadData()
         }
         
@@ -166,7 +170,7 @@ class MainViewController : UIViewController {
 
 extension MainViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewmodel.OuputWheatherData.value?.list.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,14 +183,40 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        
+        return viewmodel.OuputWheatherData.value?.list.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.id, for: indexPath) as! MainCollectionViewCell
-//        let data = viewmodel.OuputWheatherData.value![indexPath.row]
-        print("collection \(viewmodel.OuputWheatherData.value)")
+        let data = viewmodel.OuputWheatherData.value?.list[indexPath.row]
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD HH:mm:ss"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")  // TimeZone
+        var currentDate = formatter.string(from: Date())
         
+        print("current", currentDate)
+        print("api date",data?.dt_txt)
+        if var apiDate = data?.dt_txt {
+            let strdate = apiDate.index(apiDate.startIndex, offsetBy: 10) ... apiDate.index(apiDate.endIndex, offsetBy: -7)
+            var apiDate = apiDate[strdate]
+            UserDefaults.standard.setValue(apiDate, forKey: "apiDate")
+        }else{
+            print("error")
+        }
+        
+        let apiDate = UserDefaults.standard.string(forKey: "apiDate")
+        cell.timeLabel.text = apiDate! + "시"
+        
+        if var temp = data?.main.temp {
+            temp = temp - 273.15
+            UserDefaults.standard.setValue(temp, forKey: "temp")
+        }
+        let temp = UserDefaults.standard.double(forKey: "temp") 
+        let apitemp = String(format: "%.1f", temp)
+        cell.tempLabel.text = apitemp + "°"
+
         return cell
     }
     

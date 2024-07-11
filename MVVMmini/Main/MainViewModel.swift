@@ -11,7 +11,7 @@ class MainViewModel {
         
     var inputViewDidLoadTrigger : Obsevable<Void?> = Obsevable(nil)
     
-    var OuputWheatherData : Obsevable<[Weather]?> = Obsevable([])
+    var OuputWheatherData : Obsevable<Weather?> = Obsevable(nil)
     var OuputCurrentWheatherData : Obsevable<WeatherData?> = Obsevable(nil)
     
 

@@ -14,10 +14,10 @@ class APIManager {
     
     private init() { }
     
-    func callRequest(completionHandler : @escaping ([Weather]) -> Void ) {
-        let a = "https://api.openweathermap.org/data/2.5/forecast?lat=37.48547107640463&lon=126.93567839430115&appid=\(APIKey.weatherkey)"
-        let url = URL(string: a)!
-        AF.request(url).responseDecodable(of: [Weather].self) { response in
+    func callRequest(completionHandler : @escaping (Weather) -> Void ) {
+        let url = "https://api.openweathermap.org/data/2.5/forecast?lat=37.48547107640463&lon=126.93567839430115&appid=\(APIKey.weatherkey)"
+//        let url = URL(string: a)!
+        AF.request(url).responseDecodable(of: Weather.self) { response in
             switch response.result {
             case .success(let success):
                 print(" callRequest success")
