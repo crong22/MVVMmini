@@ -15,7 +15,9 @@ class APIManager {
     private init() { }
     
     func callRequest(completionHandler : @escaping (Weather) -> Void ) {
-        let url = "https://api.openweathermap.org/data/2.5/forecast?lat=37.48547107640463&lon=126.93567839430115&appid=\(APIKey.weatherkey)"
+//        let url = "https://api.openweathermap.org/data/2.5/forecast?lat=37.284593&lon=127.015629&lang=kr&appid=\(APIKey.weatherkey)"
+        //1835847
+        let url = "https://api.openweathermap.org/data/2.5/forecast?id=1835847&appid=\(APIKey.weatherkey)"
 //        let url = URL(string: a)!
         AF.request(url).responseDecodable(of: Weather.self) { response in
             switch response.result {
@@ -29,8 +31,8 @@ class APIManager {
     }
     
     func CurrentcallRequest(completionHandler : @escaping (WeatherData) -> Void ) {
-        let a = "https://api.openweathermap.org/data/2.5/weather?lat=37.48547107640463&lon=126.93567839430115&appid=\(APIKey.weatherkey)"
-        let url = URL(string: a)!
+        let url = "https://api.openweathermap.org/data/2.5/weather?id=1835847&units=metric&appid=\(APIKey.weatherkey)"
+//        let url = URL(string: a)!
         AF.request(url).responseDecodable(of: WeatherData.self) { response in
             switch response.result {
             case .success(let success):

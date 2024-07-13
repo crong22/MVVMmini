@@ -34,7 +34,7 @@ class MainTableViewCell : UITableViewCell {
     }
     
     func configureLayout() {
-        contentView.backgroundColor = .brown
+        contentView.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 255/255, alpha: 0.9)
         
         dayLabel.text = "오늘"
         dayLabel.textColor = .black
@@ -46,11 +46,13 @@ class MainTableViewCell : UITableViewCell {
         }
         
 //        weatherImage.backgroundColor = .cyan
-        weatherImage.image = UIImage(systemName: "heart")
-        weatherImage.contentMode  = .scaleAspectFill
+//        weatherImage.image = UIImage(systemName: "heart")
+        weatherImage.contentMode  = .scaleAspectFit
+        weatherImage.sizeToFit()
         weatherImage.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(5)
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(100)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(55)
+            make.height.equalTo(40)
         }
         
 //        minTempLabel.backgroundColor = .black

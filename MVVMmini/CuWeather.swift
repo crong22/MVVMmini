@@ -11,7 +11,7 @@ import Foundation
 import Foundation
 
 struct WeatherData: Decodable {
-    let coord: Coordsys
+//    let coord: Coordsys
     let weather: [Weathersys]
     let base: String
     let main: Mainsys
@@ -26,10 +26,10 @@ struct WeatherData: Decodable {
     let cod: Int
 }
 
-struct Coordsys: Decodable {
-    let lon: Double
-    let lat: Double
-}
+//struct Coordsys: Decodable {
+//    let lon: Double
+//    let lat: Double
+//}
 
 struct Weathersys: Decodable {
     let id: Int

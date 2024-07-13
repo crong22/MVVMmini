@@ -28,6 +28,7 @@
 		D85B6E842C3EDF6D004C90F3 /* MainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E832C3EDF6D004C90F3 /* MainRepository.swift */; };
 		D85B6E862C3EE0B2004C90F3 /* Obsevable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */; };
 		D85B6E8A2C3EE8FD004C90F3 /* CuWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */; };
+		D85B6E9B2C3FE741004C90F3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E9A2C3FE741004C90F3 /* test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		D85B6E832C3EDF6D004C90F3 /* MainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepository.swift; sourceTree = "<group>"; };
 		D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obsevable.swift; sourceTree = "<group>"; };
 		D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuWeather.swift; sourceTree = "<group>"; };
+		D85B6E9A2C3FE741004C90F3 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				D85B6E722C3EA3DA004C90F3 /* APIKey.swift */,
 				D85B6E792C3EA5FF004C90F3 /* Weather.swift */,
 				D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */,
+				D85B6E9A2C3FE741004C90F3 /* test.swift */,
 			);
 			path = MVVMmini;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				D85B6E862C3EE0B2004C90F3 /* Obsevable.swift in Sources */,
 				D85B6E762C3EA4DF004C90F3 /* MainViewController.swift in Sources */,
 				D85B6E7A2C3EA5FF004C90F3 /* Weather.swift in Sources */,
+				D85B6E9B2C3FE741004C90F3 /* test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
