@@ -78,7 +78,7 @@ class MainViewController : UIViewController {
             dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
 
             let dayFormatter = DateFormatter()
-            dayFormatter.dateFormat = "E" // 요일 형식 (짧은 형식)
+            dayFormatter.dateFormat = "E"
             dayFormatter.locale = Locale(identifier: "ko_KR")
             dayFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
             //
@@ -102,8 +102,6 @@ class MainViewController : UIViewController {
                     }
                 }
                 
-                // 중복값을 제거하고 유니크한 값들로 구성된 Set 생성
-//                let dayListSet: Set<String> = Set(safeDayList)
                 dayListSet = Set(safeDayList)
                 // Set을 다시 배열로 변환하여 중복 없는 리스트 생성 및 오름차순 정렬
                 var dayDateList = Array(dayListSet)
@@ -121,17 +119,14 @@ class MainViewController : UIViewController {
 
                 // 결과를 UserDefaults에 저장
                 UserDefaults.standard.setValue(dayDateWithDayOfWeek, forKey: "dayDate")
-                
-                // 결과 출력
-//                print(dayDateWithDayOfWeek)
 
             } else {
                 print("nil")
             }
             //
+            
             var arrayset = Array(dayListSet)
             arrayset.sort()
-            let icon : [String] = []
             //온도
             let apiDateCount = viewmodel.OuputWheatherData.value?.list.count
             for i in 0..<apiDateCount! {
@@ -139,7 +134,6 @@ class MainViewController : UIViewController {
                 let apidaydate = dayText?.split(separator: " ")
                 //
                 testList.updateValue(data.list[i].main.temp!, forKey: "\(String(apidaydate![0]))")
-
                 
                 for (key, value) in testList {
                     if arrayset[0] == key {
@@ -191,24 +185,31 @@ class MainViewController : UIViewController {
                 iconDict.updateValue(data.list[i].weather.first!.icon, forKey: String(apidaydate![0]))
             }
             
-            for (key, value) in iconDict {
+            // 순서 정렬 ?..
+            let sorticon = iconDict.sorted { $0.key < $1.key }
+
+            for (key, value) in sorticon {
+    
                 if arrayset[0] == key {
                     iconList.append(value)
+                    print("0", iconList)
                 }else if arrayset[1] == key {
                     iconList.append(value)
+                    print("1", iconList)
                 }else if arrayset[2] == key {
                     iconList.append(value)
+                    print("2", iconList)
                 }else if arrayset[3] == key {
                     iconList.append(value)
+                    print("3", iconList)
                 }else if arrayset[4] == key {
                     iconList.append(value)
+                    print("4", iconList)
                 }
             }
-            
+
             UserDefaults.standard.setValue(iconList, forKey: "iconList")
-            
-//            print(iconDict)
-            
+
             self.tableView.reloadData()
             self.collectionView.reloadData()
         }
@@ -218,8 +219,7 @@ class MainViewController : UIViewController {
             self.cityLabel.text = data?.name
             
             // temp
-            guard var temp = data?.main.temp  else { return }
-//            temp = temp - 273.15
+            guard let temp = data?.main.temp  else { return }
             let num = String(format: "%.1f", temp)
             self.tempLabel.text = "  \(num)°"
             
@@ -228,10 +228,8 @@ class MainViewController : UIViewController {
             self.cloudLabel.text = cloudname
             
             // max temp , min temp
-            guard var max = data?.main.temp_max  else { return }
+            guard let max = data?.main.temp_max  else { return }
             let maxtemp = String(format: "%.1f", max)
-            guard var min = data?.main.temp_min  else { return }
-            let mintemp = String(format: "%.1f", min)
             let todayTemp  = UserDefaults.standard.array(forKey: "firtTempData")
             self.maxmintempLabel.text = "최고 : \(maxtemp)° | 최저 : \(todayTemp![0])°"
         }
@@ -404,7 +402,7 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
             
             
             if indexPath.row == 0 {
-                if var firstTemp  = UserDefaults.standard.array(forKey: "firtTempData") {
+                if let firstTemp  = UserDefaults.standard.array(forKey: "firtTempData") {
                     cell.minTempLabel.text = "최저 \(firstTemp[0])°"
                     cell.maxTempLabel.text = "최고 \(firstTemp[1])°"
                 }
@@ -413,28 +411,28 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
             }else if indexPath.row == 1{
                 cell.dayLabel.text = "\(splitDay[1])"
 
-                if var twoTemp  = UserDefaults.standard.array(forKey: "twoTempData") {
+                if let twoTemp  = UserDefaults.standard.array(forKey: "twoTempData") {
                     cell.minTempLabel.text = "최저 \(twoTemp[0])°"
                     cell.maxTempLabel.text = "최고 \(twoTemp[1])°"
                 }
             }else if indexPath.row == 2 {
                 cell.dayLabel.text = "\(splitDay[1])"
 
-                if var threeTemp  = UserDefaults.standard.array(forKey: "threeTempData") {
+                if let threeTemp  = UserDefaults.standard.array(forKey: "threeTempData") {
                     cell.minTempLabel.text = "최저 \(threeTemp[0])°"
                     cell.maxTempLabel.text = "최고 \(threeTemp[1])°"
                 }
             }else if indexPath.row == 3{
                 cell.dayLabel.text = "\(splitDay[1])"
 
-                if var fourTemp  = UserDefaults.standard.array(forKey: "fourTempData") {
+                if let fourTemp  = UserDefaults.standard.array(forKey: "fourTempData") {
                     cell.minTempLabel.text = "최저 \(fourTemp[0])°"
                     cell.maxTempLabel.text = "최고 \(fourTemp[1])°"
                 }
             }else if indexPath.row == 4 {
                 cell.dayLabel.text = "\(splitDay[1])"
 
-                if var fiveTemp  = UserDefaults.standard.array(forKey: "fiveTempData") {
+                if let fiveTemp  = UserDefaults.standard.array(forKey: "fiveTempData") {
                     cell.minTempLabel.text = "최저 \(fiveTemp[0])°"
                     cell.maxTempLabel.text = "최고 \(fiveTemp[1])°"
                 }
@@ -464,7 +462,6 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
         formatter.dateFormat = "YYYY-MM-DD HH:mm:ss"
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(identifier: "Asia/Seoul")  // TimeZone
-//        let currentDate = formatter.string(from: Date())
         
         if let apiDate = data?.dt_txt {
             let strdate = apiDate.index(apiDate.startIndex, offsetBy: 10) ... apiDate.index(apiDate.endIndex, offsetBy: -7)
@@ -479,7 +476,6 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
         cell.timeLabel.text = apiDate! + "시"
         //
         
-        print("apidate 시간", apiDate)
         if var temp = data?.main.temp {
             temp = temp - 273.15
             UserDefaults.standard.setValue(temp, forKey: "temp")
@@ -487,8 +483,6 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
         let temp = UserDefaults.standard.double(forKey: "temp") 
         let apitemp = String(format: "%.1f", temp)
         cell.tempLabel.text = apitemp + "°"
-        
-        print("apidate 온도", apitemp)
         //
         
         // 날씨아이콘 (Kf)

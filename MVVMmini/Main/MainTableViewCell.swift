@@ -45,8 +45,6 @@ class MainTableViewCell : UITableViewCell {
             make.height.equalTo(50)
         }
         
-//        weatherImage.backgroundColor = .cyan
-//        weatherImage.image = UIImage(systemName: "heart")
         weatherImage.contentMode  = .scaleAspectFit
         weatherImage.sizeToFit()
         weatherImage.snp.makeConstraints { make in
@@ -55,7 +53,6 @@ class MainTableViewCell : UITableViewCell {
             make.height.equalTo(40)
         }
         
-//        minTempLabel.backgroundColor = .black
         minTempLabel.textColor = .lightGray
         minTempLabel.font = .systemFont(ofSize: 18, weight: .regular)
         minTempLabel.textAlignment = .left
@@ -66,15 +63,15 @@ class MainTableViewCell : UITableViewCell {
             make.height.equalTo(30)
         }
         
-//        maxTempLabel.backgroundColor = .purple
         maxTempLabel.textColor = .white
         maxTempLabel.font = .systemFont(ofSize: 18, weight: .regular)
         maxTempLabel.text = "최고 9°"
-        maxTempLabel.textAlignment = .right
+        maxTempLabel.textAlignment = .left
         maxTempLabel.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(3)
             make.height.equalTo(30)
+            make.width.equalTo(80)
         }
         
     }
