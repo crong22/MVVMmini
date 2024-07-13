@@ -29,6 +29,8 @@
 		D85B6E862C3EE0B2004C90F3 /* Obsevable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */; };
 		D85B6E8A2C3EE8FD004C90F3 /* CuWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */; };
 		D85B6E9B2C3FE741004C90F3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E9A2C3FE741004C90F3 /* test.swift */; };
+		D85B6E9E2C42679D004C90F3 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E9D2C42679D004C90F3 /* FindViewController.swift */; };
+		D85B6EA12C426924004C90F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6EA02C426924004C90F3 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obsevable.swift; sourceTree = "<group>"; };
 		D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuWeather.swift; sourceTree = "<group>"; };
 		D85B6E9A2C3FE741004C90F3 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		D85B6E9D2C42679D004C90F3 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
+		D85B6EA02C426924004C90F3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */,
+				D85B6E9F2C42691C004C90F3 /* Map */,
+				D85B6E9C2C42678A004C90F3 /* Find */,
 				D85B6E742C3EA4D7004C90F3 /* Main */,
 				D85B6E502C3EA312004C90F3 /* AppDelegate.swift */,
 				D85B6E522C3EA312004C90F3 /* SceneDelegate.swift */,
@@ -117,6 +123,22 @@
 				D85B6E832C3EDF6D004C90F3 /* MainRepository.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		D85B6E9C2C42678A004C90F3 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				D85B6E9D2C42679D004C90F3 /* FindViewController.swift */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		D85B6E9F2C42691C004C90F3 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				D85B6EA02C426924004C90F3 /* MapViewController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +230,7 @@
 				D85B6E552C3EA312004C90F3 /* ViewController.swift in Sources */,
 				D85B6E8A2C3EE8FD004C90F3 /* CuWeather.swift in Sources */,
 				D85B6E512C3EA312004C90F3 /* AppDelegate.swift in Sources */,
+				D85B6E9E2C42679D004C90F3 /* FindViewController.swift in Sources */,
 				D85B6E842C3EDF6D004C90F3 /* MainRepository.swift in Sources */,
 				D85B6E7C2C3ED636004C90F3 /* MainCollectionViewCell.swift in Sources */,
 				D85B6E822C3EDF2B004C90F3 /* MainViewModel.swift in Sources */,
@@ -217,6 +240,7 @@
 				D85B6E762C3EA4DF004C90F3 /* MainViewController.swift in Sources */,
 				D85B6E7A2C3EA5FF004C90F3 /* Weather.swift in Sources */,
 				D85B6E9B2C3FE741004C90F3 /* test.swift in Sources */,
+				D85B6EA12C426924004C90F3 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

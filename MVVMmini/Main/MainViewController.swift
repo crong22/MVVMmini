@@ -23,6 +23,13 @@ class MainViewController : UIViewController {
     
     let fiveLabel = UILabel()
     let fiveImage = UIImageView()
+
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    
+    let bottonView = UIView()
+    let rightButton = UIButton()
+    let leftButton = UIButton()
     
     //model선언
     let viewmodel = MainViewModel()
@@ -41,9 +48,17 @@ class MainViewController : UIViewController {
         configureView()
         
         tablecollection()
-
+        
+        rightButton.addTarget(self, action: #selector(rightButtonClicked), for: .touchUpInside)
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            backBarButtonItem.tintColor = .white  // 색상 변경
+            self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
+    @objc func rightButtonClicked() {
+        navigationController?.pushViewController(FindViewController(), animated: true)
+    }
+
     func bindData() {
         viewmodel.inputViewDidLoadTrigger.value = ()
         
@@ -235,6 +250,7 @@ class MainViewController : UIViewController {
         }
     }
     
+    
     func tablecollection() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -246,28 +262,43 @@ class MainViewController : UIViewController {
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.id)
         
     }
+    
     func configureHierarchy() {
-        view.addSubview(topView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(topView)
         
         topView.addSubview(cityLabel)
         topView.addSubview(tempLabel)
         topView.addSubview(cloudLabel)
         topView.addSubview(maxmintempLabel)
         
-        view.addSubview(collectionView)
-        view.addSubview(titleImage)
-        view.addSubview(titleLabel)
-        view.addSubview(tableView)
+        contentView.addSubview(collectionView)
+        contentView.addSubview(titleImage)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(tableView)
         
-        view.addSubview(fiveImage)
-        view.addSubview(fiveLabel)
+        contentView.addSubview(fiveImage)
+        contentView.addSubview(fiveLabel)
+        
+        contentView.addSubview(bottonView)
+        bottonView.addSubview(rightButton)
+        bottonView.addSubview(leftButton)
     }
     
     func configureLayout() {
-
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView.safeAreaLayoutGuide)
+        }
+        
         topView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.top.equalTo(contentView.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(170)
         }
         
@@ -321,7 +352,7 @@ class MainViewController : UIViewController {
         titleImage.contentMode = .center
         titleImage.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.top).offset(-35)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(35)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(35)
             make.height.equalTo(35)
             make.width.equalTo(15)
         }
@@ -335,11 +366,36 @@ class MainViewController : UIViewController {
             make.leading.equalTo(titleImage).offset(21)
             make.height.equalTo(35)
         }
-        
+        tableView.backgroundColor = .orange
         tableView.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(40)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(35)
-            make.height.equalTo(300)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(35)
+            make.height.equalTo(250)
+        }
+
+        bottonView.backgroundColor = .black
+        bottonView.snp.makeConstraints { make in
+            make.bottom.equalTo(contentView.snp.bottom)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
+            make.height.equalTo(40)
+        }
+        
+        rightButton.tintColor = .white
+        rightButton.contentMode = .scaleToFill
+        rightButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        rightButton.snp.makeConstraints { make in
+            make.top.equalTo(bottonView.safeAreaLayoutGuide).offset(5)
+            make.trailing.equalTo(bottonView.safeAreaLayoutGuide).offset(-10)
+            make.height.width.equalTo(35)
+        }
+        
+        leftButton.tintColor = .white
+        leftButton.setImage(UIImage(systemName: "map"), for: .normal)
+        leftButton.contentMode = .scaleToFill
+        leftButton.snp.makeConstraints { make in
+            make.top.equalTo(bottonView.safeAreaLayoutGuide).offset(5)
+            make.leading.equalTo(bottonView.safeAreaLayoutGuide).offset(10)
+            make.height.width.equalTo(35)
         }
         
         fiveImage.image = UIImage(systemName: "calendar")
@@ -347,7 +403,7 @@ class MainViewController : UIViewController {
         fiveImage.contentMode = .center
         fiveImage.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.top).offset(-35)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(35)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(35)
             make.height.equalTo(35)
             make.width.equalTo(15)
         }
