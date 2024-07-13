@@ -34,10 +34,10 @@ class MainTableViewCell : UITableViewCell {
     }
     
     func configureLayout() {
-        contentView.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 255/255, alpha: 0.9)
+        contentView.backgroundColor = .black
         
         dayLabel.text = "오늘"
-        dayLabel.textColor = .black
+        dayLabel.textColor = .white
         dayLabel.font = .systemFont(ofSize: 24, weight: .regular)
         dayLabel.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)

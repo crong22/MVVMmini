@@ -233,7 +233,7 @@ class MainViewController : UIViewController {
             guard var min = data?.main.temp_min  else { return }
             let mintemp = String(format: "%.1f", min)
             let todayTemp  = UserDefaults.standard.array(forKey: "firtTempData")
-            self.maxmintempLabel.text = "최고 :\(maxtemp)°  |  최저 :\(todayTemp![0])°"
+            self.maxmintempLabel.text = "최고 : \(maxtemp)° | 최저 : \(todayTemp![0])°"
         }
     }
     
@@ -266,7 +266,7 @@ class MainViewController : UIViewController {
     }
     
     func configureLayout() {
-//        topView.backgroundColor = .orange
+
         topView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
@@ -318,7 +318,6 @@ class MainViewController : UIViewController {
             make.height.equalTo(130)
         }
         
-//        titleImage.backgroundColor = .red
         titleImage.image = UIImage(systemName: "calendar")
         titleImage.tintColor = .white
         titleImage.contentMode = .center
@@ -329,7 +328,6 @@ class MainViewController : UIViewController {
             make.width.equalTo(15)
         }
         
-//        titleLabel.backgroundColor = .blue
         titleLabel.text = "3일간 간격의 일기예보"
         titleLabel.textColor = .white
         titleLabel.textAlignment = .left
@@ -369,9 +367,9 @@ class MainViewController : UIViewController {
     }
     
     func configureView() {
-        view.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 255/255, alpha: 0.8)
-        collectionView.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 255/255, alpha: 0.3)
-        tableView.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 255/255, alpha: 0.8)
+        view.backgroundColor = .black
+        collectionView.backgroundColor = .black
+        tableView.backgroundColor = .black
     }
     
     static func collectionViewLayout() -> UICollectionViewLayout {
