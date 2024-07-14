@@ -42,9 +42,10 @@ class MainViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewmodel.inputViewDidLoadTrigger.value = ()
         
         bindData()
-        viewmodel.inputViewDidLoadTrigger.value = ()
+
         configureHierarchy()
         configureLayout()
         configureView()
@@ -61,7 +62,10 @@ class MainViewController : UIViewController {
         print("didappear")
         print("city", city?.name)
         guard let city = city else { return }
-        viewmodel.inputViewcityID = city.id
+        viewmodel.inputViewcityID.value = city.id
+        
+        viewmodel.inputViewcityIDTrigger.value = ()
+
         bindData()
         
     }
@@ -72,9 +76,8 @@ class MainViewController : UIViewController {
     }
     
     func bindData() {
-//        viewmodel.inputViewcityID = 1835847
-        viewmodel.inputViewDidLoadTrigger.value = ()
         
+    
         viewmodel.OuputWheatherData.bind { [self] value in
             guard let data = value else {return}
             //

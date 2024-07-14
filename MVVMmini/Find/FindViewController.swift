@@ -108,8 +108,6 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("클릭")
-        
         let vc = MainViewController()
         // 클로저 값 전달..?
         vc.city = {
