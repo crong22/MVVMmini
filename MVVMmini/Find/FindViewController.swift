@@ -127,8 +127,9 @@ extension FindViewController : UISearchBarDelegate {
             // searchText가 빈값(true)이면 cityLsit의 값을 filterCityList 넣음.
             filterCityList = cityList
         } else {
-            //
-            filterCityList = cityList.filter { $0.name.lowercased().contains(searchText.lowercased())
+            // False일 때, 대소문자 상관없이 필터하기위해서 소문자로 모두 변경!
+            filterCityList = cityList.filter {
+                $0.name.lowercased().contains(searchText.lowercased())
             }
         }
     }
