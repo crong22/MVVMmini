@@ -31,6 +31,10 @@
 		D85B6E9B2C3FE741004C90F3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E9A2C3FE741004C90F3 /* test.swift */; };
 		D85B6E9E2C42679D004C90F3 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E9D2C42679D004C90F3 /* FindViewController.swift */; };
 		D85B6EA12C426924004C90F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6EA02C426924004C90F3 /* MapViewController.swift */; };
+		D85B6EA32C427324004C90F3 /* FindTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6EA22C427324004C90F3 /* FindTableViewCell.swift */; };
+		D85B6EA92C43EA23004C90F3 /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = D85B6EA82C43EA23004C90F3 /* CityList.json */; };
+		D85B6EAD2C43EBD0004C90F3 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6EAC2C43EBD0004C90F3 /* City.swift */; };
+		D85B6EAF2C43EF8D004C90F3 /* FindViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6EAE2C43EF8D004C90F3 /* FindViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		D85B6E9A2C3FE741004C90F3 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		D85B6E9D2C42679D004C90F3 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
 		D85B6EA02C426924004C90F3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D85B6EA22C427324004C90F3 /* FindTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTableViewCell.swift; sourceTree = "<group>"; };
+		D85B6EA82C43EA23004C90F3 /* CityList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
+		D85B6EAC2C43EBD0004C90F3 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		D85B6EAE2C43EF8D004C90F3 /* FindViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +116,8 @@
 				D85B6E792C3EA5FF004C90F3 /* Weather.swift */,
 				D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */,
 				D85B6E9A2C3FE741004C90F3 /* test.swift */,
+				D85B6EA82C43EA23004C90F3 /* CityList.json */,
+				D85B6EAC2C43EBD0004C90F3 /* City.swift */,
 			);
 			path = MVVMmini;
 			sourceTree = "<group>";
@@ -129,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				D85B6E9D2C42679D004C90F3 /* FindViewController.swift */,
+				D85B6EA22C427324004C90F3 /* FindTableViewCell.swift */,
+				D85B6EAE2C43EF8D004C90F3 /* FindViewModel.swift */,
 			);
 			path = Find;
 			sourceTree = "<group>";
@@ -211,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D85B6EA92C43EA23004C90F3 /* CityList.json in Resources */,
 				D85B6E712C3EA3BB004C90F3 /* .gitignore in Resources */,
 				D85B6E5A2C3EA313004C90F3 /* Assets.xcassets in Resources */,
 				D85B6E5D2C3EA313004C90F3 /* Base in Resources */,
@@ -226,12 +239,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D85B6E782C3EA4EF004C90F3 /* APIManager.swift in Sources */,
+				D85B6EAF2C43EF8D004C90F3 /* FindViewModel.swift in Sources */,
 				D85B6E802C3ED656004C90F3 /* MainTableViewCell.swift in Sources */,
+				D85B6EAD2C43EBD0004C90F3 /* City.swift in Sources */,
 				D85B6E552C3EA312004C90F3 /* ViewController.swift in Sources */,
 				D85B6E8A2C3EE8FD004C90F3 /* CuWeather.swift in Sources */,
 				D85B6E512C3EA312004C90F3 /* AppDelegate.swift in Sources */,
 				D85B6E9E2C42679D004C90F3 /* FindViewController.swift in Sources */,
 				D85B6E842C3EDF6D004C90F3 /* MainRepository.swift in Sources */,
+				D85B6EA32C427324004C90F3 /* FindTableViewCell.swift in Sources */,
 				D85B6E7C2C3ED636004C90F3 /* MainCollectionViewCell.swift in Sources */,
 				D85B6E822C3EDF2B004C90F3 /* MainViewModel.swift in Sources */,
 				D85B6E732C3EA3DA004C90F3 /* APIKey.swift in Sources */,

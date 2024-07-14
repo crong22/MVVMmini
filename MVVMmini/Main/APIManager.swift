@@ -13,10 +13,10 @@ class APIManager {
     static let shared = APIManager()
     
     private init() { }
-    
-    func callRequest(completionHandler : @escaping (Weather) -> Void ) {
+    // 1835847
+    func callRequest(cityid: Int ,completionHandler : @escaping (Weather) -> Void ) {
 
-        let url = "https://api.openweathermap.org/data/2.5/forecast?id=1835847&appid=\(APIKey.weatherkey)"
+        let url = "https://api.openweathermap.org/data/2.5/forecast?id=\(cityid)&appid=\(APIKey.weatherkey)"
 
         AF.request(url).responseDecodable(of: Weather.self) { response in
             switch response.result {
@@ -29,8 +29,8 @@ class APIManager {
         }
     }
     
-    func CurrentcallRequest(completionHandler : @escaping (WeatherData) -> Void ) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?id=1835847&units=metric&appid=\(APIKey.weatherkey)"
+    func CurrentcallRequest(cityid: Int ,completionHandler : @escaping (WeatherData) -> Void ) {
+        let url = "https://api.openweathermap.org/data/2.5/weather?id=\(cityid)&units=metric&appid=\(APIKey.weatherkey)"
 
         AF.request(url).responseDecodable(of: WeatherData.self) { response in
             switch response.result {

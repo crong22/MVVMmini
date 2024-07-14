@@ -34,6 +34,8 @@ class MainViewController : UIViewController {
     //model선언
     let viewmodel = MainViewModel()
     
+    var city : city?
+    
     var listDate : Weather?
     var safeDayList: [String] = []
     var listcount = 0
@@ -55,11 +57,29 @@ class MainViewController : UIViewController {
             self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("다시나타남")
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("didappear")
+        print("city", city?.name)
+        guard let city = city else { return }
+        viewmodel.inputViewcityID = city.id
+        bindData()
+        
+    }
+    
+    
+    
     @objc func rightButtonClicked() {
+        print("클릭")
         navigationController?.pushViewController(FindViewController(), animated: true)
     }
 
     func bindData() {
+//        viewmodel.inputViewcityID = 1835847
         viewmodel.inputViewDidLoadTrigger.value = ()
         
         viewmodel.OuputWheatherData.bind { [self] value in
@@ -207,19 +227,19 @@ class MainViewController : UIViewController {
     
                 if arrayset[0] == key {
                     iconList.append(value)
-                    print("0", iconList)
+ 
                 }else if arrayset[1] == key {
                     iconList.append(value)
-                    print("1", iconList)
+  
                 }else if arrayset[2] == key {
                     iconList.append(value)
-                    print("2", iconList)
+
                 }else if arrayset[3] == key {
                     iconList.append(value)
-                    print("3", iconList)
+
                 }else if arrayset[4] == key {
                     iconList.append(value)
-                    print("4", iconList)
+
                 }
             }
 
@@ -296,6 +316,7 @@ class MainViewController : UIViewController {
             make.edges.equalTo(scrollView.safeAreaLayoutGuide)
         }
         
+        topView.backgroundColor = .blue
         topView.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(10)
@@ -303,7 +324,7 @@ class MainViewController : UIViewController {
         }
         
         cityLabel.text = "Jeju City"
-        cityLabel.textColor = .white
+        cityLabel.textColor = .orange
         cityLabel.textAlignment = .center
         cityLabel.font = .systemFont(ofSize: 32, weight: .bold)
         cityLabel.snp.makeConstraints { make in
@@ -446,57 +467,57 @@ extension MainViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.id, for: indexPath) as! MainTableViewCell
         let data = viewmodel.OuputWheatherData.value?.list[indexPath.row]
-        let iconDay = UserDefaults.standard.array(forKey: "iconList")!
-        
-        if let dayDateList = UserDefaults.standard.array(forKey: "dayDate") {
-            let dateDay = dayDateList[indexPath.row] as! String
-            let splitDay = dateDay.split(separator: " ")
+        if let iconDay = UserDefaults.standard.array(forKey: "iconList"){
             
-            let imageIcon = iconDay[indexPath.row]
-            let url = URL(string: "https://openweathermap.org/img/wn/\(imageIcon)@2x.png")
-            cell.weatherImage.kf.setImage(with: url)
-            
-            
-            if indexPath.row == 0 {
-                if let firstTemp  = UserDefaults.standard.array(forKey: "firtTempData") {
-                    cell.minTempLabel.text = "최저 \(firstTemp[0])°"
-                    cell.maxTempLabel.text = "최고 \(firstTemp[1])°"
+            if let dayDateList = UserDefaults.standard.array(forKey: "dayDate") {
+                let dateDay = dayDateList[indexPath.row] as! String
+                let splitDay = dateDay.split(separator: " ")
+                
+                let imageIcon = iconDay[indexPath.row]
+                let url = URL(string: "https://openweathermap.org/img/wn/\(imageIcon)@2x.png")
+                cell.weatherImage.kf.setImage(with: url)
+                
+                
+                if indexPath.row == 0 {
+                    if let firstTemp  = UserDefaults.standard.array(forKey: "firtTempData") {
+                        cell.minTempLabel.text = "최저 \(firstTemp[0])°"
+                        cell.maxTempLabel.text = "최고 \(firstTemp[1])°"
+                    }
+                    cell.dayLabel.text = "오늘"
+                    
+                }else if indexPath.row == 1{
+                    cell.dayLabel.text = "\(splitDay[1])"
+                    
+                    if let twoTemp  = UserDefaults.standard.array(forKey: "twoTempData") {
+                        cell.minTempLabel.text = "최저 \(twoTemp[0])°"
+                        cell.maxTempLabel.text = "최고 \(twoTemp[1])°"
+                    }
+                }else if indexPath.row == 2 {
+                    cell.dayLabel.text = "\(splitDay[1])"
+                    
+                    if let threeTemp  = UserDefaults.standard.array(forKey: "threeTempData") {
+                        cell.minTempLabel.text = "최저 \(threeTemp[0])°"
+                        cell.maxTempLabel.text = "최고 \(threeTemp[1])°"
+                    }
+                }else if indexPath.row == 3{
+                    cell.dayLabel.text = "\(splitDay[1])"
+                    
+                    if let fourTemp  = UserDefaults.standard.array(forKey: "fourTempData") {
+                        cell.minTempLabel.text = "최저 \(fourTemp[0])°"
+                        cell.maxTempLabel.text = "최고 \(fourTemp[1])°"
+                    }
+                }else if indexPath.row == 4 {
+                    cell.dayLabel.text = "\(splitDay[1])"
+                    
+                    if let fiveTemp  = UserDefaults.standard.array(forKey: "fiveTempData") {
+                        cell.minTempLabel.text = "최저 \(fiveTemp[0])°"
+                        cell.maxTempLabel.text = "최고 \(fiveTemp[1])°"
+                    }
                 }
-                cell.dayLabel.text = "오늘"
-
-            }else if indexPath.row == 1{
-                cell.dayLabel.text = "\(splitDay[1])"
-
-                if let twoTemp  = UserDefaults.standard.array(forKey: "twoTempData") {
-                    cell.minTempLabel.text = "최저 \(twoTemp[0])°"
-                    cell.maxTempLabel.text = "최고 \(twoTemp[1])°"
-                }
-            }else if indexPath.row == 2 {
-                cell.dayLabel.text = "\(splitDay[1])"
-
-                if let threeTemp  = UserDefaults.standard.array(forKey: "threeTempData") {
-                    cell.minTempLabel.text = "최저 \(threeTemp[0])°"
-                    cell.maxTempLabel.text = "최고 \(threeTemp[1])°"
-                }
-            }else if indexPath.row == 3{
-                cell.dayLabel.text = "\(splitDay[1])"
-
-                if let fourTemp  = UserDefaults.standard.array(forKey: "fourTempData") {
-                    cell.minTempLabel.text = "최저 \(fourTemp[0])°"
-                    cell.maxTempLabel.text = "최고 \(fourTemp[1])°"
-                }
-            }else if indexPath.row == 4 {
-                cell.dayLabel.text = "\(splitDay[1])"
-
-                if let fiveTemp  = UserDefaults.standard.array(forKey: "fiveTempData") {
-                    cell.minTempLabel.text = "최저 \(fiveTemp[0])°"
-                    cell.maxTempLabel.text = "최고 \(fiveTemp[1])°"
-                }
+            }else {
+                print("error")
             }
-        }else {
-            print("error")
         }
-        
         return cell
     }
     

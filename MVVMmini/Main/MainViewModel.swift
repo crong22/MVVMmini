@@ -8,7 +8,7 @@
 import Foundation
 
 class MainViewModel {
-        
+    var inputViewcityID : Int = 1835847
     var inputViewDidLoadTrigger : Obsevable<Void?> = Obsevable(nil)
     
     var OuputWheatherData : Obsevable<Weather?> = Obsevable(nil)
@@ -27,13 +27,13 @@ class MainViewModel {
     }
     
     func request() {
-        APIManager.shared.callRequest { weather in
+        APIManager.shared.callRequest(cityid: inputViewcityID) { weather in
             self.OuputWheatherData.value = weather
         }
     }
     
     func callRequest() {
-        APIManager.shared.CurrentcallRequest { value in
+        APIManager.shared.CurrentcallRequest(cityid: inputViewcityID) { value in
             self.OuputCurrentWheatherData.value = value
         }
     }
