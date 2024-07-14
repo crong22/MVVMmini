@@ -56,12 +56,7 @@ class MainViewController : UIViewController {
             backBarButtonItem.tintColor = .white  // 색상 변경
             self.navigationItem.backBarButtonItem = backBarButtonItem
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("다시나타남")
 
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         print("didappear")
         print("city", city?.name)
@@ -71,13 +66,11 @@ class MainViewController : UIViewController {
         
     }
     
-    
-    
     @objc func rightButtonClicked() {
         print("클릭")
         navigationController?.pushViewController(FindViewController(), animated: true)
     }
-
+    
     func bindData() {
 //        viewmodel.inputViewcityID = 1835847
         viewmodel.inputViewDidLoadTrigger.value = ()
@@ -318,7 +311,7 @@ class MainViewController : UIViewController {
         
         topView.backgroundColor = .blue
         topView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(170)
         }

@@ -21,7 +21,7 @@ struct List: Decodable {
     let visibility: Int?
     let pop: Double?
     let rain: Rain?
-    let sys: Sys
+    let sys: Sys?
     let dt_txt: String?
 }
 

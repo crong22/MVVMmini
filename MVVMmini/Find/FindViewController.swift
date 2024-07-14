@@ -106,7 +106,6 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FindTableViewCell.id, for: indexPath) as! FindTableViewCell
-        print(cityList.first?.name)
         let data = cityList[indexPath.row]
         cell.cityLabel.text = data.name
         cell.countryLabel.text = "KR"
@@ -120,11 +119,10 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
         let selectcity = cityList[indexPath.row]
         let vc = MainViewController()
         vc.city = selectcity
-//        if let window = UIApplication.shared.windows.first {
-//            window.rootViewController = vc
-//            window.makeKeyAndVisible()
-        present(vc, animated: true)
-        }
-        
+        print(selectcity)
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController, animated: true, completion: nil)
     }
+        
+}
 
