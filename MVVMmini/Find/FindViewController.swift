@@ -109,30 +109,34 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("클릭")
-
+        
         let vc = MainViewController()
         // 클로저 값 전달..?
         vc.city = {
             filterCityList[indexPath.row]
         }()
-        let navigationController = UINavigationController(rootViewController: vc)
-        present(navigationController, animated: true, completion: nil)
-    }
         
-}
+        let nv = UINavigationController(rootViewController: vc)
+        nv.modalPresentationStyle = .fullScreen
+        present(nv, animated: true, completion: nil)
+    
+        }
+        
+    }
 
-extension FindViewController : UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            // searchText가 빈값(true)이면 cityLsit의 값을 filterCityList 넣음.
-            filterCityList = cityList
-        } else {
-            // False일 때, 대소문자 상관없이 필터하기위해서 소문자로 모두 변경!
-            filterCityList = cityList.filter {
-                $0.name.lowercased().contains(searchText.lowercased())
+    
+    extension FindViewController : UISearchBarDelegate {
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            if searchText.isEmpty {
+                // searchText가 빈값(true)이면 cityLsit의 값을 filterCityList 넣음.
+                filterCityList = cityList
+            } else {
+                // False일 때, 대소문자 상관없이 필터하기위해서 소문자로 모두 변경!
+                filterCityList = cityList.filter {
+                    $0.name.lowercased().contains(searchText.lowercased())
+                }
             }
         }
-    }
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             tableView.reloadData()
         }
