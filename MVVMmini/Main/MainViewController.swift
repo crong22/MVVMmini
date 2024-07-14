@@ -309,7 +309,6 @@ class MainViewController : UIViewController {
             make.edges.equalTo(scrollView.safeAreaLayoutGuide)
         }
         
-        topView.backgroundColor = .blue
         topView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(10)

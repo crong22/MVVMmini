@@ -15,9 +15,8 @@ class FindViewController : UIViewController {
     let tableView = UITableView()
     
     var cityList: [city] = []
-    
-//    let findmodel = FindViewModel()
-    
+    var filterCityList: [city] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,9 +31,12 @@ class FindViewController : UIViewController {
         tableView.rowHeight = 50
         tableView.register(FindTableViewCell.self, forCellReuseIdentifier: FindTableViewCell.id)
         
+        searchBar.delegate = self
+
+        filterCityList = cityList
+        
     }
     
-
     private func loadCities() {
         guard let url = Bundle.main.url(forResource: "CityList", withExtension: "json") else {
             print("JSON 파일을 찾을 수 없습니다.")
@@ -45,6 +47,7 @@ class FindViewController : UIViewController {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             cityList = try decoder.decode([city].self, from: data)
+            filterCityList = cityList
             tableView.reloadData()
         } catch {
             print("JSON 데이터를 파싱하는 중 오류가 발생했습니다: \(error)")
@@ -88,25 +91,17 @@ class FindViewController : UIViewController {
         view.backgroundColor = .black
         tableView.backgroundColor = .black
     }
-    
-//    private func bindata() {
-//        findmodel.inputViewDidLoadTrigger.value = ()
-//        print("1")
-//        findmodel.inputCityData.bind { value in
-//            print("value", value)
-//            self.findmodel.outPutCityData.value = value
-//        }
-//    }
+
 }
 
 extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cityList.count
+        return filterCityList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FindTableViewCell.id, for: indexPath) as! FindTableViewCell
-        let data = cityList[indexPath.row]
+        let data = filterCityList[indexPath.row]
         cell.cityLabel.text = data.name
         cell.countryLabel.text = "KR"
         return cell
@@ -114,9 +109,8 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("클릭")
-        //        findmodel.inputCityData.value = cityList[indexPath.row]
-        //        bindata()
-        let selectcity = cityList[indexPath.row]
+
+        let selectcity = filterCityList[indexPath.row]
         let vc = MainViewController()
         vc.city = selectcity
         print(selectcity)
@@ -125,4 +119,19 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     }
         
 }
+
+extension FindViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filterCityList = cityList
+        } else {
+            filterCityList = cityList.filter { $0.name.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            tableView.reloadData()
+        }
+        
+    }
 
