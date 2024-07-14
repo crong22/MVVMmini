@@ -110,10 +110,11 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("클릭")
 
-        let selectcity = filterCityList[indexPath.row]
         let vc = MainViewController()
-        vc.city = selectcity
-        print(selectcity)
+        // 클로저 값 전달..?
+        vc.city = {
+            filterCityList[indexPath.row]
+        }()
         let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true, completion: nil)
     }
@@ -123,8 +124,10 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
 extension FindViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
+            // searchText가 빈값(true)이면 cityLsit의 값을 filterCityList 넣음.
             filterCityList = cityList
         } else {
+            //
             filterCityList = cityList.filter { $0.name.lowercased().contains(searchText.lowercased())
             }
         }
