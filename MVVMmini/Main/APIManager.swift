@@ -13,7 +13,6 @@ class APIManager {
     static let shared = APIManager()
     
     private init() { }
-    // 1835847
     func callRequest(cityid: Int ,completionHandler : @escaping (Weather) -> Void ) {
 
         let url = "https://api.openweathermap.org/data/2.5/forecast?id=\(cityid)&appid=\(APIKey.weatherkey)"

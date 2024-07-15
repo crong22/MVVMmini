@@ -25,5 +25,9 @@ class Obsevable<T> {
         closure(value)
         self.closure = closure
     }
+    
+    func bindTwo(closure: @escaping (T) -> Void) {
+        self.closure = closure
+    }
 }
 

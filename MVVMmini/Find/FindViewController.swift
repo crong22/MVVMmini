@@ -35,6 +35,11 @@ class FindViewController : UIViewController {
 
         filterCityList = cityList
         
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        backBarButtonItem.tintColor = .black  // 색상 변경
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
     }
     
     private func loadCities() {
@@ -109,16 +114,21 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MainViewController()
+
+        vc.viewmodel.inputViewcityID.value = filterCityList[indexPath.row].id
         // 클로저 값 전달..?
         vc.city = {
             filterCityList[indexPath.row]
         }()
         
-        let nv = UINavigationController(rootViewController: vc)
-        nv.modalPresentationStyle = .fullScreen
-        present(nv, animated: true, completion: nil)
-    
+//        let nv = UINavigationController(rootViewController: vc)
+//        nv.modalPresentationStyle = .fullScreen
+//        present(nv, animated: true, completion: nil)
+
+        navigationController?.pushViewController(vc, animated: true)
+
         }
+
         
     }
 

@@ -10,6 +10,7 @@ import Foundation
 class MainViewModel {
     var inputViewcityID : Obsevable<Int?> = Obsevable(nil)
     var inputViewDidLoadTrigger : Obsevable<Void?> = Obsevable(nil)
+    
     var inputViewcityIDTrigger : Obsevable<Void?> = Obsevable(nil)
     
     var OuputWheatherData : Obsevable<Weather?> = Obsevable(nil)
@@ -22,13 +23,8 @@ class MainViewModel {
     
     func change() {
         inputViewDidLoadTrigger.bind { _ in
-            print("11111111")
-            self.request(id: 1835847)
-            self.callRequest(id: 1835847)
-        }
-        
-        inputViewcityIDTrigger.bind { _ in
-            print("22222222",self.inputViewcityID.value)
+            print("inputViewDidLoadTrigger 변동")
+            print("id", self.inputViewcityID.value)
             self.request(id : self.inputViewcityID.value ?? 1835847)
             self.callRequest(id :self.inputViewcityID.value ?? 1835847)
         }
