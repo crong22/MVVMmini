@@ -24,6 +24,7 @@ struct WeatherData: Decodable {
     let id: Int
     let name: String
     let cod: Int
+    let rain : Rainsys?
 }
 
 struct Coordsys: Decodable {
@@ -36,6 +37,14 @@ struct Weathersys: Decodable {
     let main: String
     let description: String
     let icon: String
+}
+
+struct Rainsys: Decodable {
+    let the1H: Double
+
+    enum CodingKeys: String, CodingKey {
+        case the1H = "1h"
+    }
 }
 
 struct Mainsys: Decodable {

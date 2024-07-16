@@ -11,6 +11,8 @@ import Kingfisher
 import MapKit
 import CoreLocation
 
+var mapLocate = CLLocationCoordinate2D()
+
 class MainViewController : UIViewController {
     // 스크롤뷰
     let scrollView = UIScrollView()
@@ -41,6 +43,7 @@ class MainViewController : UIViewController {
     let mapView = MKMapView()
     let mapImage = UIImageView()
     let mapLabel = UILabel()
+    
     
     // 바람속도, 구름
     let windCloud = UIView()
@@ -76,7 +79,7 @@ class MainViewController : UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        checkDeviceLocationAuthorization()
         bindData()
 
         configureHierarchy()
@@ -114,14 +117,15 @@ class MainViewController : UIViewController {
     
     @objc func leftButtonClicked() {
         print(#function)
-        checkDeviceLocationAuthorization()
+        navigationController?.pushViewController(MapViewController(), animated: true)
     }
     
     func setRegionAndAnnotation(center: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
         let annotation = MKPointAnnotation()
-        
-//        mapView.setRegion(region, animated: true)
+        annotation.coordinate = center
+        mapView.setRegion(region, animated: true)
+        mapView.addAnnotation(annotation)
     }
     
     func bindData() {
@@ -315,16 +319,27 @@ class MainViewController : UIViewController {
             
             // map
             print("맵변동")
-            let lat = self.viewmodel.OuputWheatherData.value?.city.coord.lat
-            let lon = self.viewmodel.OuputWheatherData.value?.city.coord.lon
+            let vc = MapViewController()
+            let lat = self.viewmodel.OuputCurrentWheatherData.value?.coord.lat
+            let lon = self.viewmodel.OuputCurrentWheatherData.value?.coord.lon
             let center = CLLocationCoordinate2D(latitude: lat ?? 37.5833, longitude: lon ?? 127.0)
-            
+            print("맵변동 Center", center)
+            vc.map = center
             self.mapView.mapType = MKMapType.mutedStandard
             self.mapView.region = MKCoordinateRegion(center: center, latitudinalMeters: 1000000, longitudinalMeters: 1000000)
             let annotation = MKPointAnnotation()
             annotation.coordinate = center
-            annotation.title = data?.name
-
+            print("강수량",data?.rain?.the1H)
+            guard let rainData = data?.rain?.the1H else {
+                self.mapView.removeAnnotations(self.mapView.annotations)
+                annotation.title = "0"
+                vc.raindata = 0
+                self.mapView.addAnnotation(annotation)
+                return
+            }
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            annotation.title = "\(Int(rainData))"
+            vc.raindata = Int(rainData)
             self.mapView.addAnnotation(annotation)
             
 
@@ -886,10 +901,11 @@ extension MainViewController : CLLocationManagerDelegate {
         print(locations)
         
         if let coordinate = locations.last?.coordinate {
+            let vc = MapViewController()
             print(coordinate)
             print(coordinate.latitude)
             print(coordinate.longitude)
-            
+
             setRegionAndAnnotation(center: coordinate)
         }
 
