@@ -124,7 +124,7 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
 //        let nv = UINavigationController(rootViewController: vc)
 //        nv.modalPresentationStyle = .fullScreen
 //        present(nv, animated: true, completion: nil)
-
+//        dismiss(animated: true)
         navigationController?.pushViewController(vc, animated: true)
 
         }
