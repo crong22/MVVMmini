@@ -120,13 +120,8 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
         vc.city = {
             filterCityList[indexPath.row]
         }()
-        
-//        let nv = UINavigationController(rootViewController: vc)
-//        nv.modalPresentationStyle = .fullScreen
-//        present(nv, animated: true, completion: nil)
-//        dismiss(animated: true)
-        navigationController?.pushViewController(vc, animated: true)
-
+//        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popViewController(animated: true)
         }
 
         
