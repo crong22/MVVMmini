@@ -34,7 +34,6 @@ class MapViewController : UIViewController {
         let lat = viewmodel.OuputWheatherData.value?.city.coord.lat
         let lon = viewmodel.OuputWheatherData.value?.city.coord.lon
         annotation.coordinate = CLLocationCoordinate2D(latitude: lat ?? 37.5833 , longitude: lon ?? 127.0)
-        print("Map",map)
         
         guard let rainData = raindata else {
             mapView.removeAnnotations(self.mapView.annotations)

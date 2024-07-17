@@ -341,7 +341,6 @@ class MainViewController : UIViewController {
             annotation.title = "\(Int(rainData))"
             vc.raindata = Int(rainData)
             self.mapView.addAnnotation(annotation)
-            
 
             // windSpeed , cloud, barometer, humidity
             guard let windspeed = data?.wind.speed, let cloud = data?.clouds.all else {return}
