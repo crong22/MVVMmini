@@ -120,8 +120,8 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
         vc.city = {
             filterCityList[indexPath.row]
         }()
-//        navigationController?.pushViewController(vc, animated: true)
-        navigationController?.popViewController(animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        navigationController?.popViewController(animated: true)
         }
 
         
