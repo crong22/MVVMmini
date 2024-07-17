@@ -144,10 +144,18 @@ extension FindViewController : UITableViewDelegate, UITableViewDataSource {
                     $0.name.lowercased().contains(searchText.lowercased())
                 }
             }
+            
+            tableView.reloadData()
         }
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.resignFirstResponder()
             tableView.reloadData()
         }
         
     }
+
+
+extension FindViewController : UITextFieldDelegate {
+    
+}
 
