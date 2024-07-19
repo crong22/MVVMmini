@@ -239,12 +239,9 @@ class MainViewController : UIViewController {
     var safeDayList: [String] = []
     var listcount = 0
     
-    // 현재위치
-    let locationManager = CLLocationManager()
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkDeviceLocationAuthorization()
+        
         bindData()
 
         configureHierarchy()
@@ -260,15 +257,10 @@ class MainViewController : UIViewController {
             self.navigationItem.backBarButtonItem = backBarButtonItem
             self.navigationItem.hidesBackButton = true
         
-        // 현재위치
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        cityButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
-        //
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        guard let city = city else { return }
+        guard city != nil else { return }
         bindData()
         
     }
@@ -278,7 +270,7 @@ class MainViewController : UIViewController {
     }
     
     @objc func mapButtonClicked() {
-        navigationController?.pushViewController(MapViewController(), animated: true)
+//        navigationController?.pushViewController(MapViewController(), animated: true)
     }
     
     func setRegionAndAnnotation(center: CLLocationCoordinate2D) {
@@ -812,46 +804,6 @@ class MainViewController : UIViewController {
     }
 }
 
-extension MainViewController {
-    // 1 ) 사용자에게 권한 요청을 하기 위해서, iOS 위치 서비스 활성화 여부 체크
-    func checkDeviceLocationAuthorization() {
-        // locationServicesEnabled() 타입 매서드라 CLLocationManager.locationServicesEnabled()로 호출이 가능
-        if CLLocationManager.locationServicesEnabled() {
-            // 2 ) 현재 사용자 위치 권환 상태 확인
-            checkCurrentLocationAuthorization()
-        }else {
-            print("위치 서비스 OFF, 위치 권환 요청 X")
-        }
-    }
-    
-    // 2 ) 현재 사용자 위치 권환 상태 확인
-    func checkCurrentLocationAuthorization() {
-        print(#function)
-        var status = locationManager.authorizationStatus
-        
-        if #available(iOS 14.0, *) {
-            status = locationManager.authorizationStatus
-        } else {
-            status = CLLocationManager.authorizationStatus()
-        }
-        
-        // @unknown default: 새로운 버전에 대한 케이스에대한 대처가 필요하기 때문에 생성
-        // 대신, default를 사용하면 @unknown default 필요없어짐
-        switch status {
-        case .notDetermined:
-            print("이 권한에서만 권한 문구를 띄울 수 있음")
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-        case .denied:
-            print("iOS 설정 창으로 이동하라는 alert")
-        case .authorizedWhenInUse:
-            print("위치 정보 알려달라고 로직을 구성")
-            locationManager.startUpdatingLocation()
-        default:
-            print(status)
-        }
-    }
-}
 
 extension MainViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -964,27 +916,6 @@ extension MainViewController : UICollectionViewDelegate , UICollectionViewDataSo
         return cell
     }
     
-    
 }
 
-extension MainViewController : CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(#function)
-        print(locations)
-        
-        if let coordinate = locations.last?.coordinate {
-            let vc = MapViewController()
-            print(coordinate)
-            print(coordinate.latitude)
-            print(coordinate.longitude)
 
-            setRegionAndAnnotation(center: coordinate)
-        }
-
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print(#function, "iOS14이상")
-        checkDeviceLocationAuthorization()
-    }
-}
