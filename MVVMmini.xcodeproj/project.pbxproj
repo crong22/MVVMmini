@@ -14,7 +14,6 @@
 		D85B6E5A2C3EA313004C90F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85B6E592C3EA313004C90F3 /* Assets.xcassets */; };
 		D85B6E5D2C3EA313004C90F3 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D85B6E5C2C3EA313004C90F3 /* Base */; };
 		D85B6E662C3EA32F004C90F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D85B6E652C3EA32F004C90F3 /* Alamofire */; };
-		D85B6E692C3EA356004C90F3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D85B6E682C3EA356004C90F3 /* RealmSwift */; };
 		D85B6E6C2C3EA368004C90F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D85B6E6B2C3EA368004C90F3 /* SnapKit */; };
 		D85B6E6F2C3EA374004C90F3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D85B6E6E2C3EA374004C90F3 /* Kingfisher */; };
 		D85B6E712C3EA3BB004C90F3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D85B6E702C3EA3BB004C90F3 /* .gitignore */; };
@@ -25,7 +24,6 @@
 		D85B6E7C2C3ED636004C90F3 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E7B2C3ED636004C90F3 /* MainCollectionViewCell.swift */; };
 		D85B6E802C3ED656004C90F3 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E7F2C3ED656004C90F3 /* MainTableViewCell.swift */; };
 		D85B6E822C3EDF2B004C90F3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E812C3EDF2B004C90F3 /* MainViewModel.swift */; };
-		D85B6E842C3EDF6D004C90F3 /* MainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E832C3EDF6D004C90F3 /* MainRepository.swift */; };
 		D85B6E862C3EE0B2004C90F3 /* Obsevable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */; };
 		D85B6E8A2C3EE8FD004C90F3 /* CuWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */; };
 		D85B6E9B2C3FE741004C90F3 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85B6E9A2C3FE741004C90F3 /* test.swift */; };
@@ -54,7 +52,6 @@
 		D85B6E7B2C3ED636004C90F3 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		D85B6E7F2C3ED656004C90F3 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		D85B6E812C3EDF2B004C90F3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		D85B6E832C3EDF6D004C90F3 /* MainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepository.swift; sourceTree = "<group>"; };
 		D85B6E852C3EE0B2004C90F3 /* Obsevable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obsevable.swift; sourceTree = "<group>"; };
 		D85B6E892C3EE8FD004C90F3 /* CuWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuWeather.swift; sourceTree = "<group>"; };
 		D85B6E9A2C3FE741004C90F3 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
@@ -73,7 +70,6 @@
 			files = (
 				D85B6E6F2C3EA374004C90F3 /* Kingfisher in Frameworks */,
 				D85B6E6C2C3EA368004C90F3 /* SnapKit in Frameworks */,
-				D85B6E692C3EA356004C90F3 /* RealmSwift in Frameworks */,
 				D85B6E662C3EA32F004C90F3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,7 +126,6 @@
 				D85B6E7B2C3ED636004C90F3 /* MainCollectionViewCell.swift */,
 				D85B6E7F2C3ED656004C90F3 /* MainTableViewCell.swift */,
 				D85B6E812C3EDF2B004C90F3 /* MainViewModel.swift */,
-				D85B6E832C3EDF6D004C90F3 /* MainRepository.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -171,7 +166,6 @@
 			name = MVVMmini;
 			packageProductDependencies = (
 				D85B6E652C3EA32F004C90F3 /* Alamofire */,
-				D85B6E682C3EA356004C90F3 /* RealmSwift */,
 				D85B6E6B2C3EA368004C90F3 /* SnapKit */,
 				D85B6E6E2C3EA374004C90F3 /* Kingfisher */,
 			);
@@ -205,7 +199,6 @@
 			mainGroup = D85B6E442C3EA312004C90F3;
 			packageReferences = (
 				D85B6E642C3EA32F004C90F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				D85B6E672C3EA356004C90F3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D85B6E6A2C3EA368004C90F3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D85B6E6D2C3EA374004C90F3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
@@ -246,7 +239,6 @@
 				D85B6E8A2C3EE8FD004C90F3 /* CuWeather.swift in Sources */,
 				D85B6E512C3EA312004C90F3 /* AppDelegate.swift in Sources */,
 				D85B6E9E2C42679D004C90F3 /* FindViewController.swift in Sources */,
-				D85B6E842C3EDF6D004C90F3 /* MainRepository.swift in Sources */,
 				D85B6EA32C427324004C90F3 /* FindTableViewCell.swift in Sources */,
 				D85B6E7C2C3ED636004C90F3 /* MainCollectionViewCell.swift in Sources */,
 				D85B6E822C3EDF2B004C90F3 /* MainViewModel.swift in Sources */,
@@ -497,14 +489,6 @@
 				minimumVersion = 5.9.1;
 			};
 		};
-		D85B6E672C3EA356004C90F3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		D85B6E6A2C3EA368004C90F3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -528,11 +512,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D85B6E642C3EA32F004C90F3 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		D85B6E682C3EA356004C90F3 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D85B6E672C3EA356004C90F3 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		D85B6E6B2C3EA368004C90F3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

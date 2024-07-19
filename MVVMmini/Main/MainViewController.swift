@@ -14,56 +14,221 @@ import CoreLocation
 var mapLocate = CLLocationCoordinate2D()
 
 class MainViewController : UIViewController {
+    
     // 스크롤뷰
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    // 현재 날씨정보
+    // 날씨정보(현재)
     let topView = UIView()
-    let cityLabel = UILabel()
-    let tempLabel = UILabel()
-    let cloudLabel = UILabel()
-    let maxmintempLabel = UILabel()
+    let cityLabel:  UILabel = {
+        let label = UILabel()
+        label.text = "Jeju City"
+        label.textColor = .orange
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        return label
+    }()
+    let tempLabel : UILabel = {
+        let label = UILabel()
+        label.text = "5.9°"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 90, weight: .regular)
+        return label
+    }()
+    let cloudLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Broken clouds"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        return label
+    }()
+    let maxmintempLabel : UILabel = {
+        let label = UILabel()
+        label.text = "최고 :7.0° | 최저 :-4.2°"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        return label
+    }()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     let tableView = UITableView()
     
     // 3일간격의일기예보
-    let titleLabel = UILabel()
-    let titleImage = UIImageView()
+    let threetitleLabel : UILabel = {
+        let label = UILabel()
+        label.text = "3일간 간격의 일기예보"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    let threetitleImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "calendar")
+        imageView.tintColor = .white
+        imageView.contentMode = .center
+        return imageView
+    }()
+    
     // 5일간격의일기예보
-    let fiveLabel = UILabel()
-    let fiveImage = UIImageView()
+    let fivetitleLabel : UILabel = {
+        let label = UILabel()
+        label.text = "5일간 간격의 일기예보"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    let fivetitleImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "calendar")
+        imageView.tintColor = .white
+        imageView.contentMode = .center
+        return imageView
+    }()
     
-    // 지도 ,시티목록 버튼
-    let bottonView = UIView()
-    let rightButton = UIButton()
-    let leftButton = UIButton()
-    
-    // 위치
+    // 메인화면 (지도 - 강수량표시)
     let mapView = MKMapView()
-    let mapImage = UIImageView()
-    let mapLabel = UILabel()
-    
+    let mapImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "thermometer")
+        imageView.tintColor = .white
+        imageView.contentMode = .center
+        return imageView
+    }()
+    let mapLabel : UILabel = {
+        let label = UILabel()
+        label.text = "위치"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
     
     // 바람속도, 구름
     let windCloud = UIView()
-    let windImage = UIImageView()
-    let windSpeedLable = UILabel()
-    let windSpeedValueLabel = UILabel()
-    let cloudImage = UIImageView()
-    let cloud = UILabel()
-    let cloudValueLabel = UILabel()
-    
+    let windImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "wind")
+        imageView.tintColor = .lightGray
+        imageView.contentMode = .center
+        return imageView
+    }()
+    let windSpeedLable : UILabel = {
+        let label = UILabel()
+        label.text = "바람 속도"
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    let windSpeedValueLabel : UILabel = {
+        let label = UILabel()
+        label.text = "1.35m/s"
+        label.font = .systemFont(ofSize: 40, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    let cloudImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "drop.fill")
+        imageView.tintColor = .lightGray
+        imageView.contentMode = .center
+        return imageView
+    }()
+    let bottomcloudLabel : UILabel = {
+        let label = UILabel()
+        label.text = "구름"
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    let cloudValueLabel : UILabel = {
+        let label = UILabel()
+        label.text = "50%"
+        label.font = .systemFont(ofSize: 40, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
     // 기압, 습도
     let barometerHumidity = UIView()
-    let barometerImage = UIImageView()
-    let barometerLabel = UILabel()
-    let barometerValueLabel = UILabel()
-    let barometerUnitLabel = UILabel()
+    let barometerImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "barometer")
+        imageView.tintColor = .lightGray
+        imageView.contentMode = .center
+        return imageView
+    }()
+    let barometerLabel : UILabel = {
+        let label = UILabel()
+        label.text = "기압"
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    let barometerValueLabel : UILabel = {
+        let label = UILabel()
+        label.text = "1,020"
+        label.font = .systemFont(ofSize: 40, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    let barometerUnitLabel : UILabel = {
+        let label = UILabel()
+        label.text = "hpa"
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    let humidityImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "humidity")
+        imageView.tintColor = .lightGray
+        imageView.contentMode = .center
+        return imageView
+    }()
+    let humidityLabel : UILabel = {
+        let label = UILabel()
+        label.text = "습도"
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    let humidityValueLable : UILabel = {
+        let label = UILabel()
+        label.text = "73%"
+        label.font = .systemFont(ofSize: 40, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
     
-    let humidityImage = UIImageView()
-    let humidityLabel = UILabel()
-    let humidityValueLable = UILabel()
+    // 지도(왼쪽버튼) ,시티목록(오른쪽버튼) 버튼
+    let bottonView = UIView()
+    let cityButton : UIButton = {
+        let button = UIButton()
+        button.tintColor = .white
+        button.contentMode = .scaleToFill
+        button.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        return button
+    }()
+    let mapButton : UIButton = {
+        let button = UIButton()
+        button.tintColor = .white
+        button.setImage(UIImage(systemName: "map"), for: .normal)
+        button.contentMode = .scaleToFill
+        return button
+    }()
     
     //model선언
     let viewmodel = MainViewModel()
@@ -88,7 +253,7 @@ class MainViewController : UIViewController {
         
         tablecollection()
         
-        rightButton.addTarget(self, action: #selector(rightButtonClicked), for: .touchUpInside)
+        cityButton.addTarget(self, action: #selector(cityButtonClicked), for: .touchUpInside)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
             backBarButtonItem.tintColor = .white  // 색상 변경
@@ -98,25 +263,21 @@ class MainViewController : UIViewController {
         // 현재위치
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        leftButton.addTarget(self, action: #selector(leftButtonClicked), for: .touchUpInside)
+        cityButton.addTarget(self, action: #selector(mapButtonClicked), for: .touchUpInside)
         //
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        print("didappear")
-        print("city", city?.name)
         guard let city = city else { return }
         bindData()
         
     }
     
-    @objc func rightButtonClicked() {
-        print("클릭")
+    @objc func cityButtonClicked() {
         navigationController?.pushViewController(FindViewController(), animated: true)
     }
     
-    @objc func leftButtonClicked() {
-        print(#function)
+    @objc func mapButtonClicked() {
         navigationController?.pushViewController(MapViewController(), animated: true)
     }
     
@@ -344,6 +505,7 @@ class MainViewController : UIViewController {
 
             // windSpeed , cloud, barometer, humidity
             guard let windspeed = data?.wind.speed, let cloud = data?.clouds.all else {return}
+            print(cloud)
             self.windSpeedValueLabel.text = "\(windspeed)m/s"
             self.cloudValueLabel.text = "\(cloud)%"
             guard let barometer = data?.main.pressure, let humidity = data?.main.humidity else {return}
@@ -381,20 +543,20 @@ class MainViewController : UIViewController {
         topView.addSubview(maxmintempLabel)
         
         contentView.addSubview(collectionView)
-        contentView.addSubview(titleImage)
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(threetitleImage)
+        contentView.addSubview(threetitleLabel)
         contentView.addSubview(tableView)
         
-        contentView.addSubview(fiveImage)
-        contentView.addSubview(fiveLabel)
+        contentView.addSubview(fivetitleLabel)
+        contentView.addSubview(fivetitleImage)
         
         contentView.addSubview(mapView)
         contentView.addSubview(mapImage)
         contentView.addSubview(mapLabel)
         
         view.addSubview(bottonView)
-        bottonView.addSubview(rightButton)
-        bottonView.addSubview(leftButton)
+        bottonView.addSubview(cityButton)
+        bottonView.addSubview(mapButton)
         
         contentView.addSubview(windCloud)
         windCloud.addSubview(windImage)
@@ -402,7 +564,7 @@ class MainViewController : UIViewController {
         windCloud.addSubview(windSpeedLable)
         windCloud.addSubview(cloudImage)
         windCloud.addSubview(cloudValueLabel)
-        windCloud.addSubview(cloud)
+        windCloud.addSubview(bottomcloudLabel)
         
         contentView.addSubview(barometerHumidity)
         barometerHumidity.addSubview(barometerImage)
@@ -433,39 +595,22 @@ class MainViewController : UIViewController {
             make.height.equalTo(170)
         }
         
-        cityLabel.text = "Jeju City"
-        cityLabel.textColor = .orange
-        cityLabel.textAlignment = .center
-        cityLabel.font = .systemFont(ofSize: 32, weight: .bold)
         cityLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.top)
             make.horizontalEdges.equalTo(topView.safeAreaLayoutGuide).inset(35)
         }
         
-        tempLabel.text = "5.9°"
-        tempLabel.textColor = .white
-        tempLabel.textAlignment = .center
-        tempLabel.font = .systemFont(ofSize: 90, weight: .regular)
         tempLabel.snp.makeConstraints { make in
             make.top.equalTo(cityLabel.snp.bottom)
             make.horizontalEdges.equalTo(topView.safeAreaLayoutGuide).inset(5)
             make.height.equalTo(85)
         }
         
-        cloudLabel.text = "Broken clouds"
-        cloudLabel.textColor = .white
-        cloudLabel.textAlignment = .center
-        cloudLabel.font = .systemFont(ofSize: 20, weight: .bold)
         cloudLabel.snp.makeConstraints { make in
             make.top.equalTo(tempLabel.snp.bottom)
             make.horizontalEdges.equalTo(topView.safeAreaLayoutGuide).inset(5)
             make.height.equalTo(20)
         }
-        
-        maxmintempLabel.text = "최고 :7.0° | 최저 :-4.2°"
-        maxmintempLabel.textColor = .white
-        maxmintempLabel.textAlignment = .center
-        maxmintempLabel.font = .systemFont(ofSize: 20, weight: .bold)
         maxmintempLabel.snp.makeConstraints { make in
             make.top.equalTo(cloudLabel.snp.bottom).offset(5)
             make.horizontalEdges.equalTo(topView.safeAreaLayoutGuide).inset(5)
@@ -478,23 +623,16 @@ class MainViewController : UIViewController {
             make.height.equalTo(130)
         }
         
-        titleImage.image = UIImage(systemName: "calendar")
-        titleImage.tintColor = .white
-        titleImage.contentMode = .center
-        titleImage.snp.makeConstraints { make in
+        threetitleImage.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.top).offset(-35)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(35)
             make.height.equalTo(35)
             make.width.equalTo(15)
         }
         
-        titleLabel.text = "3일간 간격의 일기예보"
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .left
-        titleLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        titleLabel.snp.makeConstraints { make in
+        threetitleLabel.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.top).offset(-35)
-            make.leading.equalTo(titleImage).offset(21)
+            make.leading.equalTo(threetitleImage).offset(21)
             make.height.equalTo(35)
         }
         
@@ -511,9 +649,6 @@ class MainViewController : UIViewController {
             make.height.equalTo(250)
         }
 
-        mapImage.image = UIImage(systemName: "thermometer")
-        mapImage.tintColor = .white
-        mapImage.contentMode = .center
         mapImage.snp.makeConstraints { make in
             make.top.equalTo(mapView.snp.top).offset(-35)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(35)
@@ -521,10 +656,6 @@ class MainViewController : UIViewController {
             make.width.equalTo(15)
         }
         
-        mapLabel.text = "위치"
-        mapLabel.textColor = .white
-        mapLabel.textAlignment = .left
-        mapLabel.font = .systemFont(ofSize: 14, weight: .regular)
         mapLabel.snp.makeConstraints { make in
             make.top.equalTo(mapView.snp.top).offset(-35)
             make.leading.equalTo(mapImage).offset(21)
@@ -537,41 +668,31 @@ class MainViewController : UIViewController {
             make.height.equalTo(55)
         }
         
-        rightButton.tintColor = .white
-        rightButton.contentMode = .scaleToFill
-        rightButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
-        rightButton.snp.makeConstraints { make in
+        cityButton.snp.makeConstraints { make in
             make.top.equalTo(bottonView.safeAreaLayoutGuide).offset(5)
             make.trailing.equalTo(bottonView.safeAreaLayoutGuide).offset(-10)
             make.height.width.equalTo(35)
         }
         
-        leftButton.tintColor = .white
-        leftButton.setImage(UIImage(systemName: "map"), for: .normal)
-        leftButton.contentMode = .scaleToFill
-        leftButton.snp.makeConstraints { make in
+        mapButton.snp.makeConstraints { make in
             make.top.equalTo(bottonView.safeAreaLayoutGuide).offset(5)
             make.leading.equalTo(bottonView.safeAreaLayoutGuide).offset(10)
             make.height.width.equalTo(35)
         }
         
-        fiveImage.image = UIImage(systemName: "calendar")
-        fiveImage.tintColor = .white
-        fiveImage.contentMode = .center
-        fiveImage.snp.makeConstraints { make in
+        fivetitleImage.image = UIImage(systemName: "calendar")
+        fivetitleImage.tintColor = .white
+        fivetitleImage.contentMode = .center
+        fivetitleImage.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.top).offset(-35)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(35)
             make.height.equalTo(35)
             make.width.equalTo(15)
         }
         
-        fiveLabel.text = "5일간 간격의 일기예보"
-        fiveLabel.textColor = .white
-        fiveLabel.textAlignment = .left
-        fiveLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        fiveLabel.snp.makeConstraints { make in
+        fivetitleLabel.snp.makeConstraints { make in
             make.top.equalTo(tableView.snp.top).offset(-35)
-            make.leading.equalTo(titleImage).offset(21)
+            make.leading.equalTo(threetitleImage).offset(21)
             make.height.equalTo(35)
         }
         
@@ -581,19 +702,12 @@ class MainViewController : UIViewController {
             make.height.equalTo(150)
         }
         
-        windImage.image = UIImage(systemName: "wind")
-        windImage.tintColor = .lightGray
-        windImage.contentMode = .center
         windImage.snp.makeConstraints { make in
             make.top.equalTo(windCloud.safeAreaLayoutGuide)
             make.leading.equalTo(windCloud.safeAreaLayoutGuide)
             make.height.equalTo(35)
         }
-        
-        windSpeedLable.text = "바람 속도"
-        windSpeedLable.textColor = .lightGray
-        windSpeedLable.textAlignment = .left
-        windSpeedLable.font = .systemFont(ofSize: 14, weight: .regular)
+    
         windSpeedLable.snp.makeConstraints { make in
             make.top.equalTo(windCloud.safeAreaLayoutGuide)
             make.leading.equalTo(windImage).offset(21)
@@ -601,40 +715,25 @@ class MainViewController : UIViewController {
             make.width.equalTo(100)
         }
         
-        windSpeedValueLabel.text = "1.35m/s"
-        windSpeedValueLabel.font = .systemFont(ofSize: 40, weight: .bold)
-        windSpeedValueLabel.textColor = .white
-        windSpeedValueLabel.textAlignment = .left
         windSpeedValueLabel.snp.makeConstraints { make in
             make.top.equalTo(windSpeedLable.snp.bottom)
             make.leading.equalTo(windCloud.safeAreaLayoutGuide)
             make.width.equalTo(158)
         }
         
-        cloudImage.image = UIImage(systemName: "drop.fill")
-        cloudImage.tintColor = .lightGray
-        cloudImage.contentMode = .center
         cloudImage.snp.makeConstraints { make in
             make.top.equalTo(windCloud.safeAreaLayoutGuide)
             make.trailing.equalTo(windCloud.safeAreaLayoutGuide).offset(-140)
             make.height.equalTo(35)
         }
         
-        cloud.text = "구름"
-        cloud.textColor = .lightGray
-        cloud.textAlignment = .left
-        cloud.font = .systemFont(ofSize: 14, weight: .regular)
-        cloud.snp.makeConstraints { make in
+        bottomcloudLabel.snp.makeConstraints { make in
             make.top.equalTo(windCloud.safeAreaLayoutGuide)
             make.leading.equalTo(cloudImage).offset(21)
             make.height.equalTo(35)
             make.width.equalTo(80)
         }
 
-        cloudValueLabel.text = "50%"
-        cloudValueLabel.font = .systemFont(ofSize: 40, weight: .bold)
-        cloudValueLabel.textColor = .white
-        cloudValueLabel.textAlignment = .left
         cloudValueLabel.snp.makeConstraints { make in
             make.top.equalTo(windSpeedLable.snp.bottom)
             make.trailing.equalTo(windCloud.safeAreaLayoutGuide)
@@ -647,59 +746,37 @@ class MainViewController : UIViewController {
             make.height.equalTo(150)
         }
         
-        barometerImage.image = UIImage(systemName: "barometer")
-        barometerImage.tintColor = .lightGray
-        barometerImage.contentMode = .center
         barometerImage.snp.makeConstraints { make in
             make.top.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.leading.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.height.equalTo(35)
         }
         
-        barometerLabel.text = "기압"
-        barometerLabel.textColor = .lightGray
-        barometerLabel.textAlignment = .left
-        barometerLabel.font = .systemFont(ofSize: 14, weight: .regular)
         barometerLabel.snp.makeConstraints { make in
             make.top.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.leading.equalTo(barometerImage).offset(21)
             make.height.equalTo(35)
             make.width.equalTo(100)
         }
-        
-        barometerValueLabel.text = "1,020"
-        barometerValueLabel.font = .systemFont(ofSize: 40, weight: .bold)
-        barometerValueLabel.textColor = .white
-        barometerValueLabel.textAlignment = .left
+    
         barometerValueLabel.snp.makeConstraints { make in
             make.top.equalTo(barometerLabel.snp.bottom)
             make.leading.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.width.equalTo(150)
         }
         
-        barometerUnitLabel.text = "hpa"
-        barometerUnitLabel.font = .systemFont(ofSize: 14, weight: .bold)
-        barometerUnitLabel.textColor = .white
-        barometerUnitLabel.textAlignment = .left
         barometerUnitLabel.snp.makeConstraints { make in
             make.top.equalTo(barometerValueLabel.snp.bottom)
             make.leading.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.width.equalTo(50)
         }
         
-        humidityImage.image = UIImage(systemName: "humidity")
-        humidityImage.tintColor = .lightGray
-        humidityImage.contentMode = .center
         humidityImage.snp.makeConstraints { make in
             make.top.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.trailing.equalTo(barometerHumidity.safeAreaLayoutGuide).offset(-140)
             make.height.equalTo(35)
         }
         
-        humidityLabel.text = "습도"
-        humidityLabel.textColor = .lightGray
-        humidityLabel.textAlignment = .left
-        humidityLabel.font = .systemFont(ofSize: 14, weight: .regular)
         humidityLabel.snp.makeConstraints { make in
             make.top.equalTo(barometerHumidity.safeAreaLayoutGuide)
             make.leading.equalTo(humidityImage).offset(21)
@@ -707,10 +784,6 @@ class MainViewController : UIViewController {
             make.width.equalTo(80)
         }
 
-        humidityValueLable.text = "73%"
-        humidityValueLable.font = .systemFont(ofSize: 40, weight: .bold)
-        humidityValueLable.textColor = .white
-        humidityValueLable.textAlignment = .left
         humidityValueLable.snp.makeConstraints { make in
             make.top.equalTo(humidityLabel.snp.bottom)
             make.trailing.equalTo(barometerHumidity.safeAreaLayoutGuide)
