@@ -15,7 +15,7 @@ class APIManager {
     private init() { }
     func callRequest(cityid: Int ,completionHandler : @escaping (Weather) -> Void ) {
 
-        let url = "https://api.openweathermap.org/data/2.5/forecast?id=\(cityid)&appid=\(APIKey.weatherkey)"
+        let url = "https://api.openweathermap.org/data/2.5/forecast?id=\(cityid)&units=metric&appid=\(APIKey.weatherkey)"
 
         AF.request(url).responseDecodable(of: Weather.self) { response in
             switch response.result {
